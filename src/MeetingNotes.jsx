@@ -4,7 +4,7 @@ import {Plus,BookOpen,Search,ChevronDown,ChevronRight,Pencil,Trash2,CalendarDays
 const uid=()=>globalThis.crypto?.randomUUID?.()||`minutes_${Date.now()}_${Math.random().toString(36).slice(2)}`;
 const today=()=>{const d=new Date();return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`};
 const blank=()=>({id:uid(),date:today(),title:'',meetingId:'',personId:'',personName:'',conversation:'',reflection:'',lessons:'',nextSteps:'',createdAt:new Date().toISOString()});
-export default function MeetingNotes({notes=[],meetings=[],roleModels=[],onChange,notify}){
+export default function MeetingNotes({notes=[],meetings=[],roleModels=[],onChange,notify,storageKey='meetingNotes',isMen=false}){
  const [query,setQuery]=useState(''),[expanded,setExpanded]=useState(null),[edit,setEdit]=useState(null);
  const people=useMemo(()=>new Map(roleModels.map(p=>[p.id,p.name])),[roleModels]);
  const meetingsById=useMemo(()=>new Map(meetings.map(m=>[m.id,m])),[meetings]);
@@ -14,12 +14,12 @@ export default function MeetingNotes({notes=[],meetings=[],roleModels=[],onChang
  const selectMeeting=id=>{const meeting=meetingsById.get(id);setEdit(old=>({...old,meetingId:id, ...(meeting?{date:meeting.date,personId:meeting.personId||'',personName:meeting.personName||'',title:old.title||meeting.title}: {})}))};
  const save=e=>{e.preventDefault();const title=edit?.title?.trim();if(!title){notify('회의록 제목을 적어 줘.');return;}
  const record={...edit,title};
- onChange(s=>({...s,meetingNotes:(s.meetingNotes||[]).some(n=>n.id===record.id)?(s.meetingNotes||[]).map(n=>n.id===record.id?record:n):[...(s.meetingNotes||[]),record]}));
+ onChange(s=>({...s,[storageKey]:(s[storageKey]||[]).some(n=>n.id===record.id)?(s[storageKey]||[]).map(n=>n.id===record.id?record:n):[...(s[storageKey]||[]),record]}));
  setEdit(null);setExpanded(record.id);notify('회의록을 저장했어.');
  };
- const remove=id=>{if(!window.confirm('이 회의록을 삭제할까? 만남 일정은 유지돼.'))return;onChange(s=>({...s,meetingNotes:(s.meetingNotes||[]).filter(n=>n.id!==id)}));if(expanded===id)setExpanded(null);notify('회의록을 삭제했어.')};
+ const remove=id=>{if(!window.confirm('이 회의록을 삭제할까? 만남 일정은 유지돼.'))return;onChange(s=>({...s,[storageKey]:(s[storageKey]||[]).filter(n=>n.id!==id)}));if(expanded===id)setExpanded(null);notify('회의록을 삭제했어.')};
  return <section className="screen meeting-notes-screen">
- <div className="heading"><div><h1>회의록</h1><p>만났던 사람과 나눈 이야기, 배운 점, 느낀 점을 회고해.</p></div><button type="button" className="small-btn" onClick={()=>setEdit(blank())}><Plus size={16}/> 회의록</button></div>
+ <div className="heading"><div><h1>{isMen?'후기':'회의록'}</h1><p>만났던 사람과 나눈 이야기, 배운 점, 느낀 점을 회고해.</p></div><button type="button" className="small-btn" onClick={()=>setEdit(blank())}><Plus size={16}/> 회의록</button></div>
  <label className="search"><Search size={17}/><input type="search" placeholder="사람·제목·회고 내용 검색" value={query} onChange={e=>setQuery(e.target.value)}/></label>
  <div className="list-heading"><b>만남 기록</b><span>{rows.length}개</span></div>
  {rows.map(n=>{const open=expanded===n.id,person=displayPerson(n);return <article className="person-card meeting-note-card" key={n.id}>
