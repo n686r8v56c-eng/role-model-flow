@@ -9,7 +9,7 @@ const parseDate=s=>{const [y,m,d]=String(s).split('-').map(Number);return new Da
 const monthKey=s=>String(s||'').slice(0,7);
 const blank=(date)=>({id:uid(),date,title:'',personId:'',personName:'',startTime:'',endTime:'',location:'',notes:'',url:'',createdAt:new Date().toISOString()});
 function safeUrl(value){try{const u=new URL(value);return ['https:','http:'].includes(u.protocol)?u.href:null}catch{return null}}
-export default function MeetingsCalendar({events=[],roleModels=[],onChange,notify}){
+export default function MeetingsCalendar({events=[],roleModels=[],onChange,notify,storageKey='meetings'}){
  const [selected,setSelected]=useState(today());
  const [shownMonth,setShownMonth]=useState(monthKey(today()));
  const [editing,setEditing]=useState(null);
@@ -24,10 +24,10 @@ export default function MeetingsCalendar({events=[],roleModels=[],onChange,notif
  const selectDate=date=>{setSelected(date);setShownMonth(monthKey(date))};
  const save=e=>{e.preventDefault();if(!editing)return;const title=editing.title.trim(),personName=editing.personName.trim();if(!title){notify('일정 제목을 입력해 줘.');return}if(editing.endTime&&editing.startTime&&editing.endTime<editing.startTime){notify('종료 시간은 시작 시간 이후로 설정해 줘.');return}
   const record={...editing,title,personName};
-  onChange(s=>({...s,meetings:(s.meetings||[]).some(x=>x.id===record.id)?(s.meetings||[]).map(x=>x.id===record.id?record:x):[...(s.meetings||[]),record]}));
+  onChange(s=>({...s,[storageKey]:(s[storageKey]||[]).some(x=>x.id===record.id)?(s[storageKey]||[]).map(x=>x.id===record.id?record:x):[...(s[storageKey]||[]),record]}));
   selectDate(record.date);setEditing(null);notify('만남 일정을 저장했어.');
  };
- const remove=id=>{if(!window.confirm('이 만남 일정을 삭제할까?'))return;onChange(s=>({...s,meetings:(s.meetings||[]).filter(x=>x.id!==id)}));notify('일정을 삭제했어.')};
+ const remove=id=>{if(!window.confirm('이 만남 일정을 삭제할까?'))return;onChange(s=>({...s,[storageKey]:(s[storageKey]||[]).filter(x=>x.id!==id)}));notify('일정을 삭제했어.')};
  return <section className="screen meetings-screen">
   <div className="heading"><div><h1>만남</h1><p>롤모델과의 만남, 행사, 네트워킹 일정을 기록해.</p></div><button type="button" className="small-btn" onClick={()=>setEditing(blank(selected))}><Plus size={16}/> 일정 추가</button></div>
   <div className="meetings-calendar">
