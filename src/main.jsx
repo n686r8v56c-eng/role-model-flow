@@ -9,7 +9,7 @@ const url='https://rmhbqqparycnlfsagjwi.supabase.co';
 const key='sb_publishable_ZVG7jdpFM69IhQaesvo08Q_Nk-X05BF';
 const ready=!!url&&!!key&&/^https:\/\//.test(url);
 const supabase=ready?createClient(url,key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:true}}):null;
-const INITIAL={projects:[],tasks:[],sessions:[],roleModels:[],menPeople:[],menResearchItems:[],menResearchFolders:[],menPlaces:[],menMeetings:[],menReviews:[],researchItems:[],researchFolders:[],qualifications:[],collaborations:[],meetings:[],meetingNotes:[],inboxItems:[],inboxFolders:[]};
+const INITIAL={projects:[],tasks:[],sessions:[],roleModels:[],appealProfile:{},menPeople:[],menResearchItems:[],menResearchFolders:[],menPlaces:[],menMeetings:[],menReviews:[],researchItems:[],researchFolders:[],qualifications:[],collaborations:[],meetings:[],meetingNotes:[],inboxItems:[],inboxFolders:[]};
 function AuthGate(){
  const [session,setSession]=useState(null),[loading,setLoading]=useState(true),[email,setEmail]=useState(''),[password,setPassword]=useState(''),[signUp,setSignUp]=useState(false),[busy,setBusy]=useState(false),[message,setMessage]=useState('');
  const {data,change,loading:dataLoading,error,canLogout}=useSyncedState(supabase,session?.user?.id,INITIAL);
