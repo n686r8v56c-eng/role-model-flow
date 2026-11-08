@@ -12,14 +12,14 @@ export default function MeetingNotes({notes=[],meetings=[],roleModels=[],onChang
  const displayPerson=n=>people.get(n.personId)||n.personName||'';
  const rows=[...notes].filter(n=>[n.title,n.date,n.personName,people.get(n.personId),n.conversation,n.reflection,n.lessons,n.nextSteps].some(value=>String(value||'').toLocaleLowerCase().includes(query.toLocaleLowerCase()))).sort((a,b)=>String(b.date||'').localeCompare(String(a.date||''))||String(b.createdAt||'').localeCompare(String(a.createdAt||'')));
  const selectMeeting=id=>{const meeting=meetingsById.get(id);setEdit(old=>({...old,meetingId:id, ...(meeting?{date:meeting.date,personId:meeting.personId||'',personName:meeting.personName||'',title:old.title||meeting.title}: {})}))};
- const save=e=>{e.preventDefault();const title=edit?.title?.trim();if(!title){notify('회의록 제목을 적어 줘.');return;}
+ const save=e=>{e.preventDefault();const title=edit?.title?.trim();if(!title){notify((isMen?'후기':'회의록')+' 제목을 적어 줘.');return;}
  const record={...edit,title};
  onChange(s=>({...s,[storageKey]:(s[storageKey]||[]).some(n=>n.id===record.id)?(s[storageKey]||[]).map(n=>n.id===record.id?record:n):[...(s[storageKey]||[]),record]}));
- setEdit(null);setExpanded(record.id);notify('회의록을 저장했어.');
+ setEdit(null);setExpanded(record.id);notify((isMen?'후기':'회의록')+'를 저장했어.');
  };
- const remove=id=>{if(!window.confirm('이 회의록을 삭제할까? 만남 일정은 유지돼.'))return;onChange(s=>({...s,[storageKey]:(s[storageKey]||[]).filter(n=>n.id!==id)}));if(expanded===id)setExpanded(null);notify('회의록을 삭제했어.')};
+ const remove=id=>{if(!window.confirm((isMen?'이 후기를':'이 회의록을')+' 삭제할까? 만남 일정은 유지돼.'))return;onChange(s=>({...s,[storageKey]:(s[storageKey]||[]).filter(n=>n.id!==id)}));if(expanded===id)setExpanded(null);notify((isMen?'후기':'회의록')+'를 삭제했어.')};
  return <section className="screen meeting-notes-screen">
- <div className="heading"><div><h1>{isMen?'후기':'회의록'}</h1><p>만났던 사람과 나눈 이야기, 배운 점, 느낀 점을 회고해.</p></div><button type="button" className="small-btn" onClick={()=>setEdit(blank())}><Plus size={16}/> 회의록</button></div>
+ <div className="heading"><div><h1>{isMen?'후기':'회의록'}</h1><p>만났던 사람과 나눈 이야기, 배운 점, 느낀 점을 회고해.</p></div><button type="button" className="small-btn" onClick={()=>setEdit(blank())}><Plus size={16}/> {isMen?'후기':'회의록'}</button></div>
  <label className="search"><Search size={17}/><input type="search" placeholder="사람·제목·회고 내용 검색" value={query} onChange={e=>setQuery(e.target.value)}/></label>
  <div className="list-heading"><b>만남 기록</b><span>{rows.length}개</span></div>
  {rows.map(n=>{const open=expanded===n.id,person=displayPerson(n);return <article className="person-card meeting-note-card" key={n.id}>
@@ -36,10 +36,10 @@ export default function MeetingNotes({notes=[],meetings=[],roleModels=[],onChang
    <div className="actions"><button type="button" onClick={()=>setEdit({...n})}><Pencil size={15}/> 수정</button><button type="button" onClick={()=>remove(n.id)}><Trash2 size={15}/> 삭제</button></div>
   </div>}
  </article>})}
- {!rows.length&&<div className="empty">{query?'검색 결과가 없어.':'만남을 기록하면 여기에 회의록과 회고가 쌓여.'}</div>}
+ {!rows.length&&<div className="empty">{query?'검색 결과가 없어.':'{isMen?'만남 후기를 쓰면 여기에 쌓여.':'만남을 기록하면 여기에 회의록과 회고가 쌓여.'}'}</div>}
  {edit&&<div className="overlay" onMouseDown={e=>e.target===e.currentTarget&&setEdit(null)}>
   <form className="dialog meeting-notes-editor" onSubmit={save}>
-   <div className="dialog-heading"><h2>회의록 {notes.some(n=>n.id===edit.id)?'수정':'등록'}</h2><button type="button" onClick={()=>setEdit(null)}>닫기</button></div>
+   <div className="dialog-heading"><h2>{isMen?'후기':'회의록'} {notes.some(n=>n.id===edit.id)?'수정':'등록'}</h2><button type="button" onClick={()=>setEdit(null)}>닫기</button></div>
    <label>만남 일정 연결 (선택)<select value={edit.meetingId||''} onChange={e=>selectMeeting(e.target.value)}><option value="">연결하지 않고 직접 기록</option>{[...meetings].sort((a,b)=>String(b.date).localeCompare(String(a.date))).map(m=><option key={m.id} value={m.id}>{meetingName(m)}</option>)}</select></label>
    <label>날짜<input required type="date" value={edit.date||today()} onChange={e=>setEdit(s=>({...s,date:e.target.value}))}/></label>
    <label>제목<input required maxLength={140} value={edit.title||''} placeholder="예: 문화기획자와의 대화" onChange={e=>setEdit(s=>({...s,title:e.target.value}))}/></label>
@@ -49,7 +49,7 @@ export default function MeetingNotes({notes=[],meetings=[],roleModels=[],onChang
    <label>만남 회고 · 느낀 점<textarea rows={4} placeholder="기억에 남는 장면, 감정, 인상" value={edit.reflection||''} onChange={e=>setEdit(s=>({...s,reflection:e.target.value}))}/></label>
    <label>배운 점 · 인사이트<textarea rows={3} placeholder="내 커리어에 참고할 만한 점" value={edit.lessons||''} onChange={e=>setEdit(s=>({...s,lessons:e.target.value}))}/></label>
    <label>다음 행동 · 후속 연락<textarea rows={3} placeholder="새로 생긴 기회, 해야 할 일, 다음 만남" value={edit.nextSteps||''} onChange={e=>setEdit(s=>({...s,nextSteps:e.target.value}))}/></label>
-   <button className="primary" type="submit">회의록 저장</button>
+   <button className="primary" type="submit">{isMen?'후기 저장':'회의록 저장'}</button>
   </form>
  </div>}
  </section>;
