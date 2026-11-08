@@ -36,7 +36,7 @@ export default function MeetingNotes({notes=[],meetings=[],roleModels=[],onChang
    <div className="actions"><button type="button" onClick={()=>setEdit({...n})}><Pencil size={15}/> 수정</button><button type="button" onClick={()=>remove(n.id)}><Trash2 size={15}/> 삭제</button></div>
   </div>}
  </article>})}
- {!rows.length&&<div className="empty">{query?'검색 결과가 없어.':'{isMen?'만남 후기를 쓰면 여기에 쌓여.':'만남을 기록하면 여기에 회의록과 회고가 쌓여.'}'}</div>}
+ {!rows.length&&<div className="empty">{query?'검색 결과가 없어.':isMen?'만남 후기를 쓰면 여기에 쌓여.':'만남을 기록하면 여기에 회의록과 회고가 쌓여.'}</div>}
  {edit&&<div className="overlay" onMouseDown={e=>e.target===e.currentTarget&&setEdit(null)}>
   <form className="dialog meeting-notes-editor" onSubmit={save}>
    <div className="dialog-heading"><h2>{isMen?'후기':'회의록'} {notes.some(n=>n.id===edit.id)?'수정':'등록'}</h2><button type="button" onClick={()=>setEdit(null)}>닫기</button></div>
