@@ -223,3 +223,25 @@
  text-align:center;
 }
 .bottomnav.bottomnav-class>button small{font-size:12px;text-align:center}
+
+/* CAREER: 6 balanced tabs, requirements, have/missing, milestones */
+.bottomnav.bottomnav-career{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));justify-items:stretch;width:100%;padding-left:max(4px,env(safe-area-inset-left));padding-right:max(4px,env(safe-area-inset-right))}
+.bottomnav.bottomnav-career>button{display:flex;flex-direction:column;align-items:center;justify-content:center;min-width:0;width:100%;padding:3px 0;text-align:center}
+.bottomnav.bottomnav-career small{white-space:nowrap;font-size:clamp(10px,2.5vw,12px);letter-spacing:-.35px}
+.career-panel .appeal-field select,.career-editor select,.meetings-editor select{width:100%;border:1px solid #e0d3e9;border-radius:10px;background:white;padding:11px 12px;font-size:16px;color:#34283e}
+.career-gap-stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:16px}
+.career-gap-stats>div{display:grid;gap:7px;border-radius:12px;background:#f2eaf9;padding:14px 10px}
+.career-gap-stats small{font-size:12px;color:#816c95}
+.career-gap-stats strong{font-size:25px;color:#7852a5}
+.career-list-card{overflow:hidden}
+.career-list-head{display:flex;align-items:center;gap:5px;padding-right:9px}
+.career-list-head>button:first-child{display:flex;gap:10px;align-items:center;min-width:0;flex:1;text-align:left;background:none;border:0;padding:14px;color:inherit}
+.career-list-head>button:first-child>span:nth-child(2){flex:1;min-width:0;display:grid;gap:5px}
+.career-list-head small{color:#90839b;font-size:13px;overflow-wrap:anywhere}
+.career-indicator{display:flex;align-items:center;justify-content:center;color:#825aa8}
+.career-pill{border-radius:99px;border:1px solid #e1d4ec;padding:7px 9px;background:#faf6fd;color:#785795;font-size:12px;white-space:nowrap}
+.career-pill.is-complete{background:#eaf5ec;color:#427448;border-color:#c5e3c7}
+.career-detail{white-space:pre-wrap;overflow-wrap:anywhere}
+.career-hint{font-size:13px;color:#897b99;margin-top:12px}
+.career-editor{max-height:calc(100dvh - 32px);overflow-y:auto}
+@media(max-width:390px){.bottomnav.bottomnav-career small{font-size:10px}.bottomnav.bottomnav-career svg{width:19px;height:19px}}
