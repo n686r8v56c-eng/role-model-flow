@@ -92,3 +92,16 @@
 .bottomnav button{width:100%;min-width:0;max-width:none;padding-inline:0}
 .bottomnav small{font-size:clamp(9px,2.5vw,12px);white-space:nowrap;letter-spacing:-.4px}
 @media(max-width:390px){.bottomnav{padding-left:1px;padding-right:1px}.bottomnav small{font-size:9px;letter-spacing:-.6px}.bottomnav button svg{width:18px;height:18px}}
+
+/* Genre switcher: ROLE MODEL / MEN */
+.topbar-actions{display:flex;align-items:center;gap:5px;min-width:0}
+.genre-picker{display:flex;align-items:center;min-width:0}
+.genre-picker select{max-width:150px;min-width:0;appearance:auto;border:1px solid #d9c9e8;background:#f8f3fb;color:#724b9e;border-radius:10px;padding:8px 6px;font-size:13px;font-weight:750}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap}
+@media(max-width:420px){
+ .topbar{gap:5px;padding:10px 8px}
+ .brand{font-size:clamp(14px,4vw,18px);white-space:nowrap;padding:0}
+ .top-inbox{font-size:12px;padding:7px 5px}
+ .genre-picker select{max-width:120px;font-size:11px;padding:8px 2px}
+ .logout{padding:6px}
+}
