@@ -245,3 +245,53 @@
 .career-hint{font-size:13px;color:#897b99;margin-top:12px}
 .career-editor{max-height:calc(100dvh - 32px);overflow-y:auto}
 @media(max-width:390px){.bottomnav.bottomnav-career small{font-size:10px}.bottomnav.bottomnav-career svg{width:19px;height:19px}}
+
+/* Laptop nav fix: older centered 560px rule left translateX(-50%) active
+   after full-width overrides and made navigation appear shifted. */
+.bottomnav{
+  left:0;
+  right:0;
+  width:100%;
+  max-width:none;
+  transform:none;
+  margin-inline:0;
+}
+@media(min-width:768px){
+  .bottomnav{
+    left:50%;
+    right:auto;
+    width:min(100%, 960px);
+    max-width:960px;
+    transform:translateX(-50%);
+    margin-inline:0;
+    border:1px solid #ebe1f2;
+    border-bottom:0;
+    border-radius:18px 18px 0 0;
+    padding-inline:16px;
+  }
+  .bottomnav.bottomnav-men,
+  .bottomnav.bottomnav-appeal,
+  .bottomnav.bottomnav-class,
+  .bottomnav.bottomnav-career{
+    width:min(100%, 960px);
+    max-width:960px;
+    left:50%;
+    right:auto;
+    transform:translateX(-50%);
+    padding-inline:16px;
+  }
+  .bottomnav > button{
+    min-width:0;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    padding:8px 3px;
+  }
+  .bottomnav > button small,
+  .bottomnav.bottomnav-class > button small,
+  .bottomnav.bottomnav-career small{
+    font-size:13px;
+    letter-spacing:0;
+    text-align:center;
+  }
+}
