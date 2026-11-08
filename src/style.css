@@ -32,3 +32,35 @@
 .qualification-pending>span button{margin-left:auto;background:none;border:0;color:#80689b}
 .qualification-mini{width:48px;height:48px;object-fit:cover;border-radius:8px}
 .photo-placeholder{display:flex;align-items:center;justify-content:center}
+
+/* Meeting calendar – compact, thumb-friendly on iPhone and iPad */
+.meetings-calendar{padding:15px;background:#fff;border:1px solid #ece3f4;border-radius:15px;margin-bottom:20px}
+.meetings-month{display:flex;justify-content:center;align-items:center;gap:10px;margin-bottom:13px}
+.meetings-month strong{font-size:18px;text-align:center;min-width:130px}
+.meetings-month button{display:inline-flex;align-items:center;justify-content:center;border:0;background:#f4edf9;color:#75549e;min-width:33px;min-height:33px;border-radius:9px}
+.meetings-month .meetings-today{font-size:12px;font-weight:700;padding:5px 8px;min-width:unset;margin-left:auto}
+.meetings-grid{display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:3px}
+.meetings-weekday{text-align:center;padding:9px 0;font-size:13px;color:#8b8097;font-weight:650}
+.meetings-day{display:flex;flex-direction:column;align-items:center;justify-content:flex-start;gap:7px;min-width:0;min-height:55px;padding:9px 2px 4px;background:#fff;border:1px solid transparent;border-radius:9px;color:#392c43;font-size:14px}
+.meetings-day.outside{color:#c6bacd}
+.meetings-day.is-today{border-color:#c1a9e0}
+.meetings-day.is-selected{background:#e9ddf7;color:#6e469a;font-weight:800;border-color:#d6bfea}
+.meetings-dots{display:flex;align-items:center;justify-content:center;gap:3px;min-height:5px}
+.meetings-dots i{width:5px;height:5px;border-radius:50%;background:#906ac0}
+.meetings-day.outside .meetings-dots i{background:#c9b8dd}
+.meetings-day-heading{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:13px}
+.meetings-day-heading>div{display:grid;gap:3px}
+.meetings-day-heading small{color:#93849c}
+.meetings-event{background:#fff;border:1px solid #e8dff1;border-radius:13px;padding:15px;display:flex;gap:9px;justify-content:space-between;margin-bottom:10px}
+.meetings-event-main{flex:1;display:grid;align-content:start;gap:8px;min-width:0}
+.meetings-event-main b{font-size:16px}
+.meetings-event-main>span,.meetings-event-main>a{display:flex;align-items:center;gap:7px;font-size:14px;color:#7b678e}
+.meetings-event-main p{font-size:14px;white-space:pre-wrap;margin:2px 0}
+.meetings-event-main>a{color:#7552a4;text-decoration:none}
+.meetings-event-actions{display:flex;align-items:start;gap:3px}
+.meetings-event-actions button{background:none;border:0;padding:6px;color:#8c71a5}
+.meetings-editor{max-height:calc(100dvh - 32px)}
+.meetings-editor select{width:100%;padding:12px;border:1px solid #dbcee9;border-radius:9px;background:#fff;color:#30263c;font-size:16px}
+.meetings-time-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+.meetings-time-fields input{min-width:0}
+@media(max-width:390px){.meetings-calendar{padding:9px}.meetings-day{min-height:49px;padding-top:8px}.meetings-month{gap:5px}.meetings-month strong{min-width:115px;font-size:16px}.bottomnav small{font-size:11px}}
