@@ -7,3 +7,28 @@
 .bottomnav small{white-space:nowrap;font-size:13px}
 .dialog select{width:100%;padding:12px;border:1px solid #dbcee9;border-radius:9px;font-size:16px;background:white;color:#30263c}
 @media(max-width:390px){.bottomnav small{font-size:12px}.brand{font-size:17px}.top-inbox{padding:8px}.topbar{padding-left:12px;padding-right:12px}}
+
+/* Role-model pictures and qualification photo inbox */
+.role-thumb{width:48px;height:48px;flex:0 0 48px;border-radius:10px;object-fit:cover;background:#f1eaf6;color:#9177b2;display:flex;align-items:center;justify-content:center}
+.role-photo-preview{max-width:150px;max-height:160px;border-radius:12px;object-fit:cover}
+.qualification-page .focus-segments{margin:14px 0;display:grid;grid-template-columns:1fr 1fr}
+.qualification-folder-bar{display:flex;gap:8px;align-items:center;justify-content:space-between;margin-top:12px}
+.qualification-folder-bar select,.qualification-actions select{flex:1;min-width:0;border:1px solid #ded1eb;background:white;border-radius:9px;padding:10px;font-size:15px}
+.qualification-card-head{display:flex;align-items:center;gap:12px;width:100%;padding:11px 14px;background:none;border:0;text-align:left;color:inherit}
+.qualification-thumb{width:54px;height:54px;flex:0 0 54px;border-radius:10px;object-fit:cover;background:#f1eaf6;display:flex;align-items:center;justify-content:center;color:#9478b4}
+.qualification-card-label{min-width:0;flex:1;display:grid;gap:5px}
+.qualification-card-label b{font-size:15px;overflow-wrap:anywhere}
+.qualification-card-label small{color:#8d7d9b;font-size:13px}
+.qualification-detail{padding:12px 14px 16px;border-top:1px solid #eee6f6}
+.qualification-photo-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-bottom:12px}
+.qualification-photo{width:100%;min-height:120px;max-height:300px;object-fit:contain;border-radius:10px;background:#f6f1fa}
+.qualification-actions{display:flex;gap:7px;align-items:center;flex-wrap:wrap}
+.qualification-actions button{display:flex;align-items:center;justify-content:center;border:1px solid #e3d7ec;border-radius:9px;padding:9px;background:white;color:#7858a2}
+.qualification-editor{max-height:calc(100dvh - 32px)}
+.qualification-editor input[type=file]{padding:12px 5px;border:1px dashed #dbc9e8;border-radius:9px;max-width:100%;font-size:14px}
+.qualification-pending{display:grid;gap:8px}
+.qualification-pending>span{display:flex;align-items:center;gap:8px;padding:7px;border:1px solid #e5d9ed;border-radius:9px}
+.qualification-pending>span small{flex:1;overflow-wrap:anywhere}
+.qualification-pending>span button{margin-left:auto;background:none;border:0;color:#80689b}
+.qualification-mini{width:48px;height:48px;object-fit:cover;border-radius:8px}
+.photo-placeholder{display:flex;align-items:center;justify-content:center}
