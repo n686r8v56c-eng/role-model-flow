@@ -64,3 +64,16 @@
 .meetings-time-fields{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
 .meetings-time-fields input{min-width:0}
 @media(max-width:390px){.meetings-calendar{padding:9px}.meetings-day{min-height:49px;padding-top:8px}.meetings-month{gap:5px}.meetings-month strong{min-width:115px;font-size:16px}.bottomnav small{font-size:11px}}
+
+/* Meeting notes and six evenly spaced bottom tabs */
+.bottomnav{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));justify-items:stretch;gap:0}
+.bottomnav button{width:100%;min-width:0;max-width:none;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;padding:4px 0}
+.bottomnav small{font-size:12px;letter-spacing:-.3px;white-space:nowrap}
+.meeting-note-symbol{display:flex;align-items:center;justify-content:center;flex:0 0 40px;width:40px;height:40px;border-radius:10px;background:#f2eaf9;color:#825fae}
+.meeting-note-card .person-head>div{min-width:0}
+.meeting-note-detail p{white-space:pre-wrap;overflow-wrap:anywhere}
+.meeting-note-linked{display:flex;align-items:center;gap:7px;font-size:13px;color:#8064a1}
+.meeting-notes-editor{max-height:calc(100dvh - 32px);overflow-y:auto}
+.meeting-notes-editor select{width:100%;font-size:16px;color:#30263c;padding:12px;border:1px solid #dbcee9;border-radius:9px;background:white}
+.meeting-notes-editor textarea{resize:vertical;min-height:82px}
+@media(max-width:420px){.bottomnav{padding-left:3px;padding-right:3px}.bottomnav button{gap:3px}.bottomnav small{font-size:11px;letter-spacing:-.5px}.bottomnav button svg{width:19px;height:19px}}
