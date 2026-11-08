@@ -202,3 +202,24 @@
  .appeal-finance-summary>div{padding:10px 6px}
  .bottomnav-appeal>button svg{width:18px;height:18px}
 }
+
+/* CLASS genre has five equally sized bottom tabs */
+.bottomnav.bottomnav-class{
+ display:grid;
+ grid-template-columns:repeat(5,minmax(0,1fr));
+ justify-items:stretch;
+ width:100%;
+ margin:0;
+ padding-left:max(4px,env(safe-area-inset-left));
+ padding-right:max(4px,env(safe-area-inset-right));
+}
+.bottomnav.bottomnav-class>button{
+ width:100%;
+ min-width:0;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+ justify-content:center;
+ text-align:center;
+}
+.bottomnav.bottomnav-class>button small{font-size:12px;text-align:center}
