@@ -142,3 +142,63 @@
   width: 100%;
   text-align: center;
 }
+
+/* APPEAL genre, seven profile pages and aggregated improvement notes */
+.bottomnav.bottomnav-appeal{grid-template-columns:repeat(7,minmax(0,1fr))}
+.appeal-top-button{display:flex;align-items:center;justify-content:center;gap:4px;padding:8px;border:1px solid #ddcbef;background:#f7f0fc;color:#7850a5;border-radius:10px;font-size:13px;font-weight:700;white-space:nowrap}
+.appeal-top-button.selected{background:#e7d5f8}
+.appeal-screen .heading{align-items:center}
+.appeal-count{display:inline-block;flex-shrink:0;background:#eee5f7;color:#7b559b;border-radius:20px;padding:7px 10px;font-size:12px;font-weight:700}
+.appeal-overview,.appeal-editor,.appeal-improvement{background:#fff;border:1px solid #eae1f3;border-radius:15px;padding:18px;margin-bottom:16px}
+.appeal-subheading{display:flex;align-items:center;justify-content:space-between;gap:8px;margin-bottom:14px}
+.appeal-subheading h2{font-size:19px;margin:0}
+.appeal-subheading h3{font-size:16px;margin:0}
+.appeal-appearance{display:grid;grid-template-columns:minmax(100px,200px) 1fr;gap:18px;align-items:stretch}
+.appeal-portrait{width:100%;height:210px;object-fit:cover;border-radius:14px;background:#f2ecf9;color:#9973b7;display:flex;align-items:center;justify-content:center}
+.appeal-appearance-stats{display:grid;gap:10px}
+.appeal-detail{padding:13px;background:#f9f6fc;border-radius:10px;display:grid;gap:6px}
+.appeal-detail span{font-size:13px;color:#857295}
+.appeal-detail strong{font-size:16px;white-space:pre-wrap;overflow-wrap:anywhere;font-weight:650}
+.appeal-overview>.appeal-detail+.appeal-detail{margin-top:10px}
+.appeal-prose{white-space:pre-wrap;overflow-wrap:anywhere;margin:12px 0 0;line-height:1.65}
+.appeal-improvement h2{font-size:17px;margin:0 0 8px}
+.appeal-improvement>p:not(.appeal-prose){font-size:13px;color:#857592}
+.appeal-improvement .appeal-prose{padding:13px;background:#faf7fd;border-radius:10px;margin-bottom:12px}
+.appeal-field{display:grid;gap:7px;font-size:14px;font-weight:650;color:#604a75;margin-bottom:13px}
+.appeal-field input,.appeal-field textarea{font-size:16px;width:100%;min-width:0;border:1px solid #e0d3e9;border-radius:10px;padding:11px 12px;background:#fff;color:#332940;line-height:1.5}
+.appeal-two-cols{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+.appeal-edit-photo{display:flex;gap:15px;align-items:center;margin-bottom:16px}
+.appeal-edit-photo .appeal-portrait{width:110px;height:120px;flex:0 0 110px}
+.appeal-photo-upload{position:relative;overflow:hidden;cursor:pointer;display:flex;align-items:center}
+.appeal-photo-upload input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.appeal-finance-summary{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin-bottom:17px}
+.appeal-finance-summary>div{display:grid;gap:5px;background:#f8f2fb;padding:12px 9px;border-radius:11px;min-width:0}
+.appeal-finance-summary small{font-size:12px;color:#836d99}
+.appeal-finance-summary strong{font-size:clamp(11px,2.8vw,17px);overflow-wrap:anywhere;color:#7553a4}
+.appeal-preview-list{margin:16px 0}
+.appeal-preview-list h3{font-size:16px;margin:0 0 7px}
+.appeal-preview-list>div{display:flex;flex-wrap:wrap;gap:5px 10px;justify-content:space-between;border-bottom:1px solid #f1eaf6;padding:11px 0;white-space:pre-wrap}
+.appeal-preview-list small{width:100%;font-size:13px;color:#85748f;white-space:pre-wrap}
+.appeal-hint{font-size:14px;color:#9586a1;margin:8px 0}
+.appeal-entries{margin:15px 0 22px}
+.appeal-entry{border:1px solid #eee4f5;border-radius:10px;margin:8px 0;background:#fff}
+.appeal-entry-title{display:flex;align-items:center}
+.appeal-entry-title>button:first-child{flex:1;min-width:0;display:flex;flex-wrap:wrap;justify-content:space-between;gap:5px;text-align:left;padding:12px;border:0;background:none}
+.appeal-entry-title>button:not(:first-child){padding:10px 7px;border:0;background:none;color:#8165a0}
+.appeal-entry-form{padding:12px;border-top:1px solid #eee4f5}
+.appeal-close{border:0;background:none;color:#79608d}
+.appeal-save-actions{display:flex;gap:8px;align-items:center;justify-content:flex-end;margin:16px 0 30px}
+.appeal-save-actions button{display:flex;align-items:center;gap:6px}
+.appeal-improvement-entry>p{white-space:pre-wrap;overflow-wrap:anywhere;padding:0 15px 16px;margin:0}
+.appeal-improvements-list .heading{align-items:center}
+@media(max-width:440px){
+ .genre-picker select{max-width:110px}
+ .appeal-top-button{font-size:12px;padding:7px 5px}
+ .appeal-top-button svg{width:13px}
+ .appeal-overview,.appeal-editor,.appeal-improvement{padding:13px}
+ .appeal-appearance{grid-template-columns:minmax(95px,40%) 1fr;gap:10px}
+ .appeal-portrait{height:165px}
+ .appeal-finance-summary{gap:5px}
+ .appeal-finance-summary>div{padding:10px 6px}
+ .bottomnav-appeal>button svg{width:18px;height:18px}
+}
