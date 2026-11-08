@@ -1,9 +1,10 @@
 import React,{useMemo,useState} from 'react';
-import {Home,Video,Inbox,Plus,Pencil,Trash2,ChevronDown,ChevronUp,Link2,Copy,ExternalLink,LogOut,Check,Search,ArrowUp,ArrowDown,GraduationCap,Building2,CalendarDays} from 'lucide-react';
+import {Home,Video,Inbox,Plus,Pencil,Trash2,ChevronDown,ChevronUp,Link2,Copy,ExternalLink,LogOut,Check,Search,ArrowUp,ArrowDown,GraduationCap,Building2,CalendarDays,BookOpen} from 'lucide-react';
 import {InboxPanel} from './InboxPanel.jsx';
 import CareerCollection from './CareerCollection.jsx';
 import QualificationInbox from './QualificationInbox.jsx';
 import MeetingsCalendar from './MeetingsCalendar.jsx';
+import MeetingNotes from './MeetingNotes.jsx';
 import {CareerPhoto,uploadCareerPhoto} from './CareerPhoto.jsx';
 const uid=()=>globalThis.crypto?.randomUUID?.() || Date.now().toString(36)+Math.random().toString(36).slice(2);
 const today=()=>{const d=new Date();return [d.getFullYear(),String(d.getMonth()+1).padStart(2,'0'),String(d.getDate()).padStart(2,'0')].join('-')};
@@ -65,8 +66,9 @@ export default function App({initialData,onDataChange,onLogout,client,userId}){
   tab==='qualifications'?<QualificationInbox roleModels={data.roleModels||[]} items={data.qualifications||[]} folders={data.qualificationFolders||[]} onChange={onDataChange} notify={alertUser} client={client} userId={userId}/>:
   tab==='collaborations'?<CareerCollection kind="collaborations" roleModels={data.roleModels||[]} items={data.collaborations||[]} onChange={onDataChange} notify={alertUser}/>:
   tab==='meetings'?<MeetingsCalendar events={data.meetings||[]} roleModels={data.roleModels||[]} onChange={onDataChange} notify={alertUser}/>:
+  tab==='minutes'?<MeetingNotes notes={data.meetingNotes||[]} meetings={data.meetings||[]} roleModels={data.roleModels||[]} onChange={onDataChange} notify={alertUser}/>:
   <InboxPanel data={data} onDataChange={onDataChange} today={today()} notify={alertUser} storageClient={client} userId={userId} onOpenTask={id=>alertUser('오늘 할 일에 저장되어 있어.')} renderToday={()=><div className="focus-panel"><h2>오늘의 기회 실행</h2>{todayTasks.map(t=><div className="today-row" key={t.id}><input type="checkbox" checked={t.status==='done'} onChange={e=>onDataChange(s=>({...s,tasks:s.tasks.map(x=>x.id===t.id?{...x,status:e.target.checked?'done':'todo'}:x)}))}/><span>{t.title}</span></div>)}{!todayTasks.length&&<p className="muted">인박스 항목을 펼쳐 ‘오늘’을 누르면 여기에 모여.</p>}</div>}/>}
- </main><nav className="bottomnav" aria-label="앱 메뉴">{[['home',Home,'홈'],['videos',Video,'영상 북마크'],['qualifications',GraduationCap,'자격'],['collaborations',Building2,'협업'],['meetings',CalendarDays,'만남']].map(([id,Icon,label])=><button key={id} className={tab===id?'selected':''} onClick={()=>setTab(id)}><Icon size={21}/><small>{label}</small></button>)}</nav>
+ </main><nav className="bottomnav" aria-label="앱 메뉴">{[['home',Home,'홈'],['videos',Video,'영상 북마크'],['qualifications',GraduationCap,'자격'],['collaborations',Building2,'협업'],['meetings',CalendarDays,'만남'],['minutes',BookOpen,'회의록']].map(([id,Icon,label])=><button key={id} className={tab===id?'selected':''} onClick={()=>setTab(id)}><Icon size={21}/><small>{label}</small></button>)}</nav>
  {personEdit&&<div className="overlay" onMouseDown={e=>e.target===e.currentTarget&&setPersonEdit(null)}><form className="dialog" onSubmit={savePerson}><div className="dialog-heading"><h2>롤모델 {data.roleModels?.some(p=>p.id===personEdit.id)?'수정':'추가'}</h2><button type="button" disabled={personSaving} onClick={()=>setPersonEdit(null)}>닫기</button></div>{[['name','이름','예: 롤모델 이름'],['field','활동 분야','예: 무용·강의·문화기획'],['career','직업·활동','예: 안무가·문화예술 강사'],['goal','내가 닮고 싶은 커리어','예: 지역 축제와 공연 기획 참여'],['url','참고 링크','https://...']].map(([key,label,placeholder])=><label key={key}>{label}<input value={personEdit[key]||''} placeholder={placeholder} onChange={e=>setPersonEdit(s=>({...s,[key]:e.target.value}))} required={key==='name'}/></label>)}<label>경력·관찰 메모<textarea rows={4} value={personEdit.notes||''} onChange={e=>setPersonEdit(s=>({...s,notes:e.target.value}))}/></label>
  <label>롤모델 사진<input type="file" accept="image/*" onChange={e=>{setPersonPhoto(e.target.files?.[0]||null);e.target.value=''}}/></label>
  {personPhoto&&<p className="muted">선택한 사진: {personPhoto.name}</p>}
