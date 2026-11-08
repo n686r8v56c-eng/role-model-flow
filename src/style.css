@@ -105,3 +105,6 @@
  .genre-picker select{max-width:120px;font-size:11px;padding:8px 2px}
  .logout{padding:6px}
 }
+
+/* MEN has six tabs; ROLE MODEL retains seven */
+.bottomnav.bottomnav-men{grid-template-columns:repeat(6,minmax(0,1fr))}
